@@ -1,0 +1,34 @@
+---
+- name: Install Repo for PHP 5.4 - Epel Release 6.8
+  yum:
+    name: "http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+    state: "present"
+
+- name: Install Repo for PHP 5.4 - Remi Release 6
+  yum:
+    name: "http://rpms.famillecollet.com/enterprise/remi-release-6.rpm"
+    state: "present"
+
+- name: Install PHP
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+    enablerepo: "remi,remi-test"
+  with_items: php_packages
+
+- name: Install Extras PHP packages
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+    enablerepo: "remi,remi-test"
+  with_items: php_extras_packages
+
+- name: Setting TimeZone php.ini
+  shell: sed -i 's@;date.timezone =@date.timezone = America/Sao_Paulo@g' /etc/php.ini
+  notify: restart httpd
+
+- name: Install Composer
+  shell: curl -sS https://getcomposer.org/installer | php
+
+- name: Make Composer Global
+  shell: mv composer.phar /usr/local/bin/composer

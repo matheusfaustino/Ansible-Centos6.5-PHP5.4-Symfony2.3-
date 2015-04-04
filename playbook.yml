@@ -1,0 +1,22 @@
+---
+- hosts: all
+  sudo: true
+  gather_facts: no
+
+  vars:
+    doc_root: /vagrant
+    basic_packages: ['curl','git','htop','vim','wget']
+    php_packages: ['php','php-common']
+    php_extras_packages: ['php-intl','php-posix','php-mysql','php-pgsql','php-pecl-mongo','php-pecl-memcache','php-pecl-memcached','php-gd','php-mbstring','php-mcrypt','php-xml','php-pecl-apc','php-cli','php-pear','php-pdo']
+    project_url:
+      - { server_name: 'local.symfony23', doc_root: 'symfony', symfony_project: true }
+    mysql_packages: ['mysql','mysql-server','MySQL-python']
+    mysql_root_password: abc123
+    symfony_version: 2.3
+
+  roles:
+    - initial
+    - apache
+    - mysql
+    - php
+    - symfony

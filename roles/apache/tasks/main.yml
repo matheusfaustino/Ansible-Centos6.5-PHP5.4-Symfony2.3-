@@ -1,0 +1,24 @@
+---
+- name: Install Apache
+  yum:
+    name: "httpd"
+    state: "latest"
+
+- name: Setting vagrant user in Apache
+  shell: sed -i 's@User apache@User vagrant@g' /etc/httpd/conf/httpd.conf
+
+- name: Setting vagrant group in Apache
+  shell: sed -i 's@Group apache@Group vagrant@g' /etc/httpd/conf/httpd.conf
+
+- name: Setting vhost Apache
+  template:
+    src: "vhost.tpl"
+    dest: "/etc/httpd/conf.d/{{ item.server_name }}.conf"
+  notify: restart httpd
+  with_items: project_url
+
+- name: Ensure Apache is started and enabled on boot.
+  service:
+    name: "httpd"
+    state: "started"
+    enabled: "yes"

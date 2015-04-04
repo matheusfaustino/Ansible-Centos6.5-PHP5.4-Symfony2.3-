@@ -1,0 +1,22 @@
+---
+- name: Install Symfony Installer
+  shell: curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
+
+- name: Make Symfony Installer Executable
+  shell: chmod a+x /usr/local/bin/symfony
+
+- name: Install Symfony Project
+  shell: "cd {{ doc_root }} && /usr/local/bin/symfony new {{ item.doc_root }} {{ symfony_version }}"
+  when: item.symfony_project
+  with_items: project_url
+
+- name: Install project in hosts
+  shell: "echo -n 'localhost {{ item.server_name }}' >> /etc/hosts "
+  when: "grep '{{ item.server_name }}' /etc/hosts"
+  with_items: project_url
+  notify: restart httpd
+
+- name: Install project in hosts
+  shell: "echo -n 'localhost {{ item.server_name }}' >> /etc/hosts "
+  when: "grep -Fxq '{{ item.server_name }}' /etc/hosts"
+  with_items: project_url

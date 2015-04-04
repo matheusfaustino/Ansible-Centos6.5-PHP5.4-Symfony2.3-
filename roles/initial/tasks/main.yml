@@ -1,0 +1,11 @@
+---
+- name: Update Yum
+  yum:
+    name: "*"
+    state: "latest"
+
+- name: Install Basics Apps
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  with_items: basic_packages
