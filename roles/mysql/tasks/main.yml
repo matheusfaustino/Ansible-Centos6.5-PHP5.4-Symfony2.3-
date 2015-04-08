@@ -6,7 +6,10 @@
   with_items: mysql_packages
 
 - name: Ensure MySQL is started and enabled on boot.
-  service: "name=mysqld state=started enabled=yes"
+  service:
+    name: "mysqld"
+    state: "started"
+    enabled: "yes"
   notify: restart mysql
 
 - name: Verify if .my.cnf file exist
@@ -37,7 +40,11 @@
   when: cnf_exist.stat.exists
 
 - name: Remove anonymous MySQL user.
-  mysql_user: "name='' state=absent"
+  mysql_user:
+    name: ""
+    state: "absent"
 
 - name: Remove MySQL test database.
-  mysql_db: "name='test' state=absent"
+  mysql_db:
+    name: "test"
+    state: "absent"
