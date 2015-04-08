@@ -24,9 +24,15 @@
   with_items: php_extras_packages
 
 - name: Setting TimeZone php.ini
-  shell: sed -i 's@;date.timezone =@date.timezone = America/Sao_Paulo@g' /etc/php.ini
+  lineinfile:
+    dest: "/etc/php.ini"
+    regexp: "^;date.timezone ="
+    line: "date.timezone = {{ php_timezone }}"
+    state: "present"
   notify: restart httpd
 
+# verificar se composer ja nao existe
+# trocar como pega o composer
 - name: Install Composer
   shell: curl -sS https://getcomposer.org/installer | php
 
