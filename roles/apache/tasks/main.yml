@@ -5,10 +5,18 @@
     state: "latest"
 
 - name: Setting vagrant user in Apache
-  shell: sed -i 's@User apache@User vagrant@g' /etc/httpd/conf/httpd.conf
+  lineinfile:
+    dest: "/etc/httpd/conf/httpd.conf"
+    regexp: "^User apache"
+    line: "User vagrant"
+    state: "present"
 
 - name: Setting vagrant group in Apache
-  shell: sed -i 's@Group apache@Group vagrant@g' /etc/httpd/conf/httpd.conf
+  lineinfile:
+    dest: "/etc/httpd/conf/httpd.conf"
+    regexp: "^Group apache"
+    line: "Group vagrant"
+    state: "present"
 
 - name: Setting vhost Apache
   template:
