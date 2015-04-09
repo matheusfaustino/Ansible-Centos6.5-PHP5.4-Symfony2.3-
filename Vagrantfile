@@ -13,6 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # setting provisioner to config box
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
+    ansible.tags = "host"
   end
 
   # networking config
