@@ -1,0 +1,10 @@
+---
+
+- name: Add created project in host file
+  lineinfile:
+    dest: "{{ host_location }}"
+    regexp: "^127.0.0.1"
+    line: "127.0.0.1 {{ item.server_name }}"
+    state: "present"
+    insertafter: "EOF"
+  with_items: project_url
