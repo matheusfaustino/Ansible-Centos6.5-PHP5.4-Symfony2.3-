@@ -1,13 +1,18 @@
 ---
 
 doc_root: /vagrant
+host_location: /etc/hosts
+
 basic_packages: ['curl','git','htop','vim','wget']
+
+mysql_packages: ['mysql','mysql-server','MySQL-python']
+mysql_root_password: abc123
+
 php_packages: ['php','php-common']
 php_timezone: America/Sao_Paulo
 php_extras_packages: ['php-intl','php-posix','php-mysql','php-pgsql','php-pecl-mongo','php-pecl-memcache','php-pecl-memcached','php-gd','php-mbstring','php-mcrypt','php-xml','php-pecl-apc','php-cli','php-pear','php-pdo']
+
+symfony_version: 2.3
+
 project_url:
   - { server_name: 'local.symfony23', doc_root: 'symfony', symfony_project: true }
-mysql_packages: ['mysql','mysql-server','MySQL-python']
-mysql_root_password: abc123
-symfony_version: 2.3
-host_location: /etc/hosts
