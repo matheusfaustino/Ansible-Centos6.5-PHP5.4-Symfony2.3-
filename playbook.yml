@@ -4,7 +4,7 @@
   gather_facts: no
 
   vars_files:
-    - /vars/vars.yml
+    - vars/vars.yml
 
   roles:
     - { role: initial, tags: ['initial'] }
