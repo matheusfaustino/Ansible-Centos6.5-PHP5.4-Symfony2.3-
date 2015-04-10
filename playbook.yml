@@ -17,9 +17,9 @@
     host_location: /etc/hosts
 
   roles:
-    - initial
-    - apache
-    - mysql
-    - php
-    - symfony
-    - { role: hosts, tags: ['host'] }
+    - { role: initial, tags: ['initial'] }
+    - { role: apache, tags: ['apache','setup'] }
+    - { role: mysql, tags: ['mysql','setup'] }
+    - { role: php, tags: ['php','setup','dev'] }
+    - { role: symfony, tags: ['symfony','dev'] }
+    - { role: hosts, tags: ['host','dev'] }
