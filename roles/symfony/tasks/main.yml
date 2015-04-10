@@ -18,14 +18,3 @@
   when: item.symfony_project
   with_items: project_url
   ignore_errors: yes
-
-# - name: Install project in hosts
-#   shell: "echo -n 'localhost {{ item.server_name }}' >> /etc/hosts "
-#   when: "grep '{{ item.server_name }}' /etc/hosts"
-#   with_items: project_url
-#   notify: restart httpd
-
-# - name: Install project in hosts
-#   shell: "echo -n 'localhost {{ item.server_name }}' >> /etc/hosts "
-#   when: "grep -Fxq '{{ item.server_name }}' /etc/hosts"
-#   with_items: project_url
